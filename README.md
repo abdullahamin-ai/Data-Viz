@@ -1,15 +1,10 @@
 <div align="center">
 
-<img src="Images/Landing_Page.png" alt="Data Visualization SaaS" width="100%" style="border-radius: 12px;" />
-
-<br/>
-<br/>
-
-# 📊 Data Visualization SaaS
+# 📊 DataViz
 
 **Upload a CSV or JSON file. Get an interactive dashboard in seconds.**
 
-AI-powered chart suggestions · Saved dashboards · JWT Auth · REST API
+AI-powered chart suggestions · Multi-chart dashboards · JWT Auth · Export to PNG & CSV
 
 <br/>
 
@@ -26,63 +21,18 @@ AI-powered chart suggestions · Saved dashboards · JWT Auth · REST API
 
 ---
 
-## ✨ What it does
+## ✨ Features
 
-Upload any **CSV or JSON** file and instantly get:
-
-- 📈 **AI-suggested charts** — bar, line, and pie recommendations based on your columns
-- 🎛️ **Interactive dashboard** — pick X/Y axes and render charts on the fly
-- 💾 **Saved dashboards** — persist and revisit your work anytime
-- 🔐 **JWT authentication** — signup, login, and secure per-user data
-- ⚡ **Background processing** — Celery + Redis handles heavy lifting off-request
-- 🤖 **Local AI** — Ollama (LLaMA 3.2) for suggestions, with rule-based fallback
-
----
-
-## 📸 Screenshots
-
-<table>
-  <tr>
-    <td align="center">
-      <img src="Images/Landing_Page.png" alt="Landing Page" width="420"/>
-      <br/><b>Landing Page</b>
-    </td>
-    <td align="center">
-      <img src="Images/Login_page .png" alt="Login" width="420"/>
-      <br/><b>Login</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="Images/Upload_Dashboard.png" alt="Upload" width="420"/>
-      <br/><b>Upload & AI Suggestions</b>
-    </td>
-    <td align="center">
-      <img src="Images/Dashboard.png" alt="Dashboard" width="420"/>
-      <br/><b>Interactive Dashboard</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="Images/Charts.png" alt="Charts" width="420"/>
-      <br/><b>Charts View</b>
-    </td>
-    <td align="center">
-      <img src="Images/Saved_dashboard.png" alt="Saved Dashboards" width="420"/>
-      <br/><b>Saved Dashboards</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="Images/Swagger_UI.png" alt="Swagger UI" width="420"/>
-      <br/><b>Swagger API Docs</b>
-    </td>
-    <td align="center">
-      <img src="Images/Console_Preview.png" alt="Console" width="420"/>
-      <br/><b>Console Preview</b>
-    </td>
-  </tr>
-</table>
+- 📂 **CSV & JSON Upload** — drag-and-drop any structured file, up to 25 MB
+- 🔍 **Auto Column Detection** — numeric, categorical, datetime, and text columns are detected automatically on upload — no manual tagging
+- 🤖 **AI Chart Suggestions** — Ollama (LLaMA 3.2) recommends the best chart type for each column pairing; falls back to rule-based logic automatically if Ollama is unavailable
+- 🎛️ **Interactive Dashboard Builder** — choose X/Y axes, aggregation (sum / avg / count), and chart type; add as many charts as needed to one dashboard
+- 📊 **4 Chart Types** — Bar, Line, Area, and Donut — each with its own color from a curated palette
+- 💾 **Saved Dashboards** — persist any dashboard and reopen it fully rebuilt from live data
+- 📤 **Export Anywhere** — download any chart as a PNG or export its data as a CSV
+- 🔐 **JWT Authentication** — signup, login, and strict per-user data isolation
+- ⚡ **Background Processing** — Celery + Redis handle heavy file processing off-request so the API stays fast
+- 📖 **Auto API Docs** — Swagger UI available at `/docs` out of the box
 
 ---
 
@@ -93,28 +43,30 @@ Upload any **CSV or JSON** file and instantly get:
 | | Technology | Version | Role |
 |---|---|---|---|
 | ⚡ | **FastAPI** | 0.115 | REST API framework |
+| 🦄 | **Uvicorn** | 0.30 | ASGI server |
 | 🗄️ | **SQLAlchemy** | 2.0 | ORM |
 | 🔄 | **Alembic** | 1.13 | Database migrations |
 | 🐬 | **MySQL** | 8 | Primary database |
 | 🌿 | **Celery** | 5.4 | Background job queue |
 | 🔴 | **Redis** | 5 | Celery message broker |
 | 🤖 | **Ollama (LLaMA 3.2)** | — | Local AI chart suggestions |
-| 🔑 | **PyJWT + bcrypt** | — | Auth & password hashing |
-| 🚀 | **Uvicorn** | 0.30 | ASGI server |
+| 🔑 | **PyJWT + bcrypt** | 2.9 / 4.0 | Auth & password hashing |
+| ✅ | **Pydantic v2** | 2.8 | Request / response validation |
+| 🧪 | **Pytest** | 8 | Test suite |
 
 ### Frontend
 
 | | Technology | Version | Role |
 |---|---|---|---|
-| ⚛️ | **React** | 18 | UI framework |
+| ⚛️ | **React** | 18.3 | UI framework |
 | 🔷 | **TypeScript** | 5.7 | Type safety |
 | ⚡ | **Vite** | 6 | Build tool & dev server |
-| 🎨 | **Tailwind CSS** | 3.4 | Styling |
-| 📊 | **Recharts** | 2.15 | Chart rendering |
-| 🎬 | **Framer Motion** | 11 | Animations |
-| 🌐 | **Axios** | 1.7 | HTTP client |
+| 🎨 | **Tailwind CSS** | 3.4 | Utility-first styling |
+| 📊 | **Recharts** | 2.15 | Bar, Line, Area, Donut charts |
+| 🎬 | **Framer Motion** | 11 | Page transitions & animations |
+| 🌐 | **Axios** | 1.7 | HTTP client with 401 interceptor |
 | 🔀 | **React Router** | v7 | Client-side routing |
-| 🖼️ | **Lucide React** | 0.468 | Icons |
+| 🖼️ | **Lucide React** | 0.468 | Icon set |
 
 ---
 
@@ -124,26 +76,26 @@ Upload any **CSV or JSON** file and instantly get:
 ┌──────────────────────┐          ┌──────────────────────────┐
 │   React 18 + Vite    │◄────────►│   FastAPI + Uvicorn      │
 │   (Port 5173)        │  HTTP    │   (Port 8000)            │
-└──────────────────────┘          └────────┬─────────────────┘
-                                           │
-                          ┌────────────────┼────────────────┐
-                          │                │                │
-                    ┌─────▼──────┐  ┌──────▼─────┐  ┌──────▼──────┐
-                    │   MySQL    │  │   Redis    │  │   Ollama    │
-                    │ (Database) │  │ (Broker)   │  │  (AI / LLM) │
-                    └────────────┘  └──────┬─────┘  └─────────────┘
-                                           │
-                                    ┌──────▼──────┐
-                                    │   Celery    │
-                                    │  (Worker)   │
-                                    └─────────────┘
+└──────────────────────┘          └──────────┬───────────────┘
+                                             │
+                            ┌────────────────┼───────────────┐
+                            │                │               │
+                      ┌─────▼──────┐  ┌──────▼─────┐  ┌─────▼──────┐
+                      │   MySQL    │  │   Redis    │  │   Ollama   │
+                      │ (Database) │  │ (Broker)   │  │ (LLaMA 3.2)│
+                      └────────────┘  └──────┬─────┘  └────────────┘
+                                             │
+                                      ┌──────▼──────┐
+                                      │   Celery    │
+                                      │  (Worker)   │
+                                      └─────────────┘
 ```
 
-**Request flow:**
-1. User uploads CSV/JSON → FastAPI parses columns instantly → returns metadata + AI suggestions
-2. Celery worker picks up the task from Redis → processes file in background
-3. User selects X/Y axes from suggestions → Recharts renders chart in browser
-4. User saves dashboard → stored in MySQL → retrievable anytime
+**How a request flows:**
+1. User uploads CSV/JSON → FastAPI parses columns instantly → returns metadata + AI chart suggestions
+2. Celery worker picks up the processing task from Redis in the background
+3. User picks X/Y columns and chart type → Recharts renders it in the browser
+4. User saves the dashboard → stored in MySQL → fully rebuildable anytime
 
 ---
 
@@ -153,35 +105,29 @@ Upload any **CSV or JSON** file and instantly get:
 
 | Tool | Version | Required |
 |------|---------|----------|
-| Python | 3.11+ | ✅ |
-| Node.js | 18+ | ✅ |
-| MySQL | 8+ | ✅ |
-| Redis | 5+ | ✅ |
+| Python | 3.11+ | ✅ Yes |
+| Node.js | 18+ | ✅ Yes |
+| MySQL | 8+ | ✅ Yes |
+| Redis | 5+ | ✅ Yes |
 | Ollama | latest | ⚠️ Optional |
 
-> **Note:** If Ollama is not installed, the app automatically falls back to rule-based chart suggestions — everything still works.
+> If Ollama is not installed the app falls back to rule-based suggestions automatically — everything still works.
 
 ---
 
 ### 1️⃣ MySQL
 
-Install and start MySQL Server. The backend **automatically creates the database** on first startup — no manual SQL needed.
-
----
+Install and start MySQL. The backend **creates the database automatically** on first run — no manual SQL needed.
 
 ### 2️⃣ Redis
 
-Install Redis and start it on default port `6379`.
-
----
+Install Redis and start it on the default port `6379`.
 
 ### 3️⃣ Ollama *(optional)*
 
 ```bash
 ollama pull llama3.2
 ```
-
----
 
 ### 4️⃣ Backend
 
@@ -199,35 +145,31 @@ source .venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Setup environment variables
+# Set up environment variables
 # Windows
 copy .env.example .env
 # Linux / macOS
 cp .env.example .env
 ```
 
-Open `.env` and fill in your database credentials, then:
+Edit `.env` with your database credentials, then start the server:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-> ✅ First startup auto-creates the database and runs `alembic upgrade head`.
-> 
-> 📖 API docs available at **http://localhost:8000/docs**
-
----
+> ✅ First startup auto-creates the database and runs `alembic upgrade head`
+>
+> 📖 Swagger API docs → **http://localhost:8000/docs**
 
 ### 5️⃣ Celery Worker
 
-In a **separate terminal** (with venv activated):
+Open a **separate terminal** (with venv activated):
 
 ```bash
 cd backend
 celery -A app.workers.celery_app.celery_app worker --loglevel=info
 ```
-
----
 
 ### 6️⃣ Frontend
 
@@ -247,17 +189,19 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 📂 Sample Data
+## 📂 Sample Dataset
 
-A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-data/sales-sample.csv).
+A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-data/sales-sample.csv) so you can try the app immediately after signing up — no need to find your own data.
 
-25 rows of product sales across regions and dates — upload it right after signing up to see all chart types in action.
+It contains **25 rows** of product sales across regions, categories, and dates:
 
-| Column | Type | Triggers |
-|--------|------|---------|
-| `date` | DateTime | 📈 Line chart |
-| `region`, `category`, `product` | Categorical | 📊 Bar & 🥧 Pie chart |
+| Column | Type | What it triggers |
+|--------|------|-----------------|
+| `date` | DateTime | 📈 Line & Area chart |
+| `region`, `category`, `product` | Categorical | 📊 Bar & 🍩 Donut chart |
 | `sales`, `units`, `rating` | Numeric | Y-axis values |
+
+After signing up, go to **New dataset**, upload the file, and all four chart types will be suggested automatically.
 
 ---
 
@@ -267,19 +211,21 @@ A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-da
 |--------|----------|------|-------------|
 | `POST` | `/api/auth/signup` | ❌ | Register a new user |
 | `POST` | `/api/auth/login` | ❌ | Login and receive JWT token |
-| `POST` | `/api/upload` | ✅ | Upload CSV/JSON dataset |
-| `GET` | `/api/chart-data/{dataset_id}` | ✅ | Fetch chart data (`?x=col&y=col`) |
+| `POST` | `/api/upload` | ✅ | Upload CSV / JSON dataset |
+| `GET` | `/api/upload/{dataset_id}` | ✅ | Get dataset info & suggestions |
+| `GET` | `/api/chart-data/{dataset_id}` | ✅ | Fetch chart data (`?x=col&y=col&agg=sum`) |
 | `POST` | `/api/dashboards` | ✅ | Save a dashboard |
 | `GET` | `/api/dashboards` | ✅ | List all saved dashboards |
 | `GET` | `/api/dashboards/{id}` | ✅ | Get a specific dashboard |
+| `PUT` | `/api/dashboards/{id}` | ✅ | Update a saved dashboard |
 | `DELETE` | `/api/dashboards/{id}` | ✅ | Delete a dashboard |
 | `GET` | `/health` | ❌ | Health check |
 
-Full interactive docs: **http://localhost:8000/docs**
+Full interactive docs → **http://localhost:8000/docs**
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Tests
 
 ```bash
 cd backend
@@ -291,16 +237,63 @@ pytest -q
 ## 📋 Key Design Decisions
 
 **1. In-request parsing for instant feedback**
-Small uploads are parsed synchronously so the API returns column metadata and AI suggestions immediately. Celery handles async processing in the background for scalability.
+Uploads are parsed synchronously so column metadata and AI suggestions come back immediately. Celery handles deeper processing asynchronously in the background.
 
-**2. JSON row storage**
-Dataset rows are stored as JSON to keep the chart-data service generic across any file shape. For very large production datasets, a columnar or object-storage architecture would be the next step.
+**2. Multi-chart dashboard grid**
+Each dashboard holds multiple independent charts side by side. Charts are stored as config (x / y / type) and rebuilt from live data on load — not as snapshots — so they always reflect the latest aggregation.
 
-**3. AI with graceful fallback**
-Ollama (LLaMA 3.2) runs locally — no external API costs or data leaving your machine. If unavailable, rule-based logic kicks in automatically so the app never breaks.
+**3. Local AI, zero external cost**
+Ollama (LLaMA 3.2) runs entirely on your machine. No API keys, no data sent to third parties. If Ollama is offline, rule-based fallback takes over silently.
 
 **4. Per-user data isolation**
-All datasets and dashboards are scoped to the authenticated user via JWT. No cross-user data leakage.
+Every dataset and dashboard is scoped to the authenticated user's JWT. No cross-user data is ever accessible.
+
+---
+
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="Images/Landing_Page.png" alt="Landing Page" width="100%"/>
+      <br/><b>Landing Page</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="Images/Login_page .png" alt="Login" width="100%"/>
+      <br/><b>Login</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="Images/Upload_Dashboard.png" alt="Upload & AI Suggestions" width="100%"/>
+      <br/><b>Upload & AI Suggestions</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="Images/Dashboard.png" alt="Interactive Dashboard" width="100%"/>
+      <br/><b>Interactive Dashboard</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="Images/Charts.png" alt="Charts View" width="100%"/>
+      <br/><b>Charts View</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="Images/Saved_dashboard.png" alt="Saved Dashboards" width="100%"/>
+      <br/><b>Saved Dashboards</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="Images/Swagger_UI.png" alt="Swagger API Docs" width="100%"/>
+      <br/><b>Swagger API Docs</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="Images/Console_Preview.png" alt="Console Preview" width="100%"/>
+      <br/><b>Console Preview</b>
+    </td>
+  </tr>
+</table>
 
 ---
 
