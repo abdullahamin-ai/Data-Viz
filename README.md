@@ -8,14 +8,24 @@ AI-powered chart suggestions · Multi-chart dashboards · JWT Auth · Export to 
 
 <br/>
 
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-5-DC382D?style=for-the-badge&logo=redis&logoColor=white)
-![Celery](https://img.shields.io/badge/Celery-5.4-37814A?style=for-the-badge&logo=celery&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)
+<!-- Backend -->
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-%23009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-%233776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![MySQL](https://img.shields.io/badge/MySQL-8-%234479A1?style=flat-square&logo=mysql&logoColor=white)](https://mysql.com)
+[![Redis](https://img.shields.io/badge/Redis-5-%23DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io)
+[![Celery](https://img.shields.io/badge/Celery-5.4-%2337814A?style=flat-square&logo=celery&logoColor=white)](https://docs.celeryq.dev)
+
+<!-- Frontend -->
+[![React](https://img.shields.io/badge/React-18-%2361DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-%233178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-6-%23646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-%2306B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Recharts](https://img.shields.io/badge/Recharts-2.15-%238884d8?style=flat-square)](https://recharts.org)
+
+<br/>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-%23F59E0B?style=flat-square)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-%2337814A?style=flat-square)](https://github.com/abdullahamin-ai/Data-Viz/pulls)
 
 </div>
 
@@ -23,16 +33,16 @@ AI-powered chart suggestions · Multi-chart dashboards · JWT Auth · Export to 
 
 ## ✨ Features
 
-- 📂 **CSV & JSON Upload** — drag-and-drop any structured file, up to 25 MB
-- 🔍 **Auto Column Detection** — numeric, categorical, datetime, and text columns are detected automatically on upload — no manual tagging
-- 🤖 **AI Chart Suggestions** — Ollama (LLaMA 3.2) recommends the best chart type for each column pairing; falls back to rule-based logic automatically if Ollama is unavailable
+- 📂 **CSV & JSON Upload** — drag-and-drop any structured file up to 25 MB
+- 🔍 **Auto Column Detection** — numeric, categorical, datetime, and text columns detected automatically on upload — no manual tagging
+- 🤖 **AI Chart Suggestions** — Ollama (LLaMA 3.2) recommends the best chart type for your data; falls back to rule-based logic if Ollama is unavailable
 - 🎛️ **Interactive Dashboard Builder** — choose X/Y axes, aggregation (sum / avg / count), and chart type; add as many charts as needed to one dashboard
 - 📊 **4 Chart Types** — Bar, Line, Area, and Donut — each with its own color from a curated palette
 - 💾 **Saved Dashboards** — persist any dashboard and reopen it fully rebuilt from live data
 - 📤 **Export Anywhere** — download any chart as a PNG or export its data as a CSV
 - 🔐 **JWT Authentication** — signup, login, and strict per-user data isolation
-- ⚡ **Background Processing** — Celery + Redis handle heavy file processing off-request so the API stays fast
-- 📖 **Auto API Docs** — Swagger UI available at `/docs` out of the box
+- ⚡ **Background Processing** — Celery + Redis handle heavy file processing off-request
+- 📖 **Auto API Docs** — Swagger UI at `/docs` out of the box
 
 ---
 
@@ -73,29 +83,31 @@ AI-powered chart suggestions · Multi-chart dashboards · JWT Auth · Export to 
 ## 🏗️ Architecture
 
 ```
-┌──────────────────────┐          ┌──────────────────────────┐
-│   React 18 + Vite    │◄────────►│   FastAPI + Uvicorn      │
-│   (Port 5173)        │  HTTP    │   (Port 8000)            │
-└──────────────────────┘          └──────────┬───────────────┘
-                                             │
-                            ┌────────────────┼───────────────┐
-                            │                │               │
-                      ┌─────▼──────┐  ┌──────▼─────┐  ┌─────▼──────┐
-                      │   MySQL    │  │   Redis    │  │   Ollama   │
-                      │ (Database) │  │ (Broker)   │  │ (LLaMA 3.2)│
-                      └────────────┘  └──────┬─────┘  └────────────┘
-                                             │
-                                      ┌──────▼──────┐
-                                      │   Celery    │
-                                      │  (Worker)   │
-                                      └─────────────┘
+┌─────────────┐     HTTP      ┌──────────────────────────┐
+│  React 18   │◄────────────►│   FastAPI + Uvicorn       │
+│  :5173      │              │   :8000                   │
+└─────────────┘              └────────┬──────────────────┘
+                                      │
+               ┌──────────────────────┼──────────────────┐
+               │                      │                  │
+         ┌─────▼──────┐        ┌──────▼─────┐    ┌──────▼──────┐
+         │  MySQL 8   │        │  Redis 5   │    │   Ollama    │
+         │  :3306     │        │  :6379     │    │  LLaMA 3.2  │
+         │  ORM:      │        │  Broker    │    │  :11434     │
+         │  SQLAlchemy│        └──────┬─────┘    └─────────────┘
+         └────────────┘               │          ↑ rule-based
+                                ┌─────▼──────┐    fallback if
+                                │  Celery    │    unavailable
+                                │  5.4       │
+                                │  Worker    │
+                                └────────────┘
 ```
 
-**How a request flows:**
-1. User uploads CSV/JSON → FastAPI parses columns instantly → returns metadata + AI chart suggestions
-2. Celery worker picks up the processing task from Redis in the background
-3. User picks X/Y columns and chart type → Recharts renders it in the browser
-4. User saves the dashboard → stored in MySQL → fully rebuildable anytime
+**Request flow:**
+1. User uploads CSV/JSON → FastAPI parses columns instantly → returns metadata + AI suggestions
+2. Celery picks up the processing task from Redis in the background
+3. User picks X/Y axes + chart type → Recharts renders it in the browser
+4. User saves dashboard → stored in MySQL → fully rebuildable anytime
 
 ---
 
@@ -191,7 +203,7 @@ Open **http://localhost:5173** in your browser.
 
 ## 📂 Sample Dataset
 
-A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-data/sales-sample.csv) so you can try the app immediately after signing up — no need to find your own data.
+A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-data/sales-sample.csv) — no need to find your own data to try the app.
 
 It contains **25 rows** of product sales across regions, categories, and dates:
 
@@ -237,13 +249,13 @@ pytest -q
 ## 📋 Key Design Decisions
 
 **1. In-request parsing for instant feedback**
-Uploads are parsed synchronously so column metadata and AI suggestions come back immediately. Celery handles deeper processing asynchronously in the background.
+Uploads are parsed synchronously so column metadata and AI suggestions return immediately. Celery handles deeper processing in the background for scalability.
 
 **2. Multi-chart dashboard grid**
 Each dashboard holds multiple independent charts side by side. Charts are stored as config (x / y / type) and rebuilt from live data on load — not as snapshots — so they always reflect the latest aggregation.
 
 **3. Local AI, zero external cost**
-Ollama (LLaMA 3.2) runs entirely on your machine. No API keys, no data sent to third parties. If Ollama is offline, rule-based fallback takes over silently.
+Ollama (LLaMA 3.2) runs entirely on your machine. No API keys, no data sent to third parties. If Ollama is offline, rule-based fallback kicks in silently.
 
 **4. Per-user data isolation**
 Every dataset and dashboard is scoped to the authenticated user's JWT. No cross-user data is ever accessible.
