@@ -15,7 +15,26 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](LICENSE)
 
+**Upload a spreadsheet. Walk away with a dashboard.**
+No manual chart configuration, no BI license, no data leaving your machine.
+
 </div>
+
+---
+
+## 📑 Table of Contents
+
+- [Features](#-features)
+- [Tech Stack](#️-tech-stack)
+- [Architecture](#️-architecture)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#-environment-variables)
+- [Sample Dataset](#-sample-dataset)
+- [API Reference](#-api-reference)
+- [Tests](#-tests)
+- [Key Design Decisions](#-key-design-decisions)
+- [Screenshots](#-screenshots)
+- [Roadmap](#-roadmap)
 
 ---
 
@@ -102,6 +121,8 @@
 3. User selects X/Y axes + chart type → Recharts renders in the browser
 4. User saves dashboard → stored in MySQL → rebuildable anytime
 
+> **How the fallback works:** if Ollama isn't reachable, chart suggestions are generated from simple column-type heuristics — e.g. a datetime column paired with a numeric column suggests Line/Area, two categorical + one numeric suggests Bar, and a single categorical + numeric pair suggests Donut. The UI behaves identically either way; only the source of the suggestion changes.
+
 ---
 
 ## 🚀 Getting Started
@@ -151,7 +172,7 @@ copy .env.example .env
 cp .env.example .env
 ```
 
-Edit `.env` with your database credentials, then:
+Edit `.env` with your database credentials (see [Environment Variables](#-environment-variables) below), then:
 
 ```bash
 uvicorn app.main:app --reload
@@ -188,6 +209,30 @@ Open **http://localhost:5173**
 
 ---
 
+## 🔐 Environment Variables
+
+### Backend (`backend/.env`)
+
+| Variable | Example | Description |
+|---|---|---|
+| `DATABASE_URL` | `mysql+pymysql://user:pass@localhost:3306/dataviz` | MySQL connection string |
+| `JWT_SECRET_KEY` | `change-me-to-a-long-random-string` | Signing key for JWTs — **must** be overridden in production |
+| `JWT_ALGORITHM` | `HS256` | JWT signing algorithm |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | `60` | JWT expiry window |
+| `REDIS_URL` | `redis://localhost:6379/0` | Celery broker/result backend |
+| `OLLAMA_HOST` | `http://localhost:11434` | Ollama endpoint; leave unset to force rule-based fallback |
+| `MAX_UPLOAD_SIZE_MB` | `25` | Upload size cap |
+
+### Frontend (`frontend/.env`)
+
+| Variable | Example | Description |
+|---|---|---|
+| `VITE_API_BASE_URL` | `http://localhost:8000` | Base URL the frontend calls for the API |
+
+> ⚠️ Never commit a real `.env` file. Only `.env.example` (with placeholder values) should be tracked in git.
+
+---
+
 ## 📂 Sample Dataset
 
 A ready-to-use dataset is included at [`sample-data/sales-sample.csv`](sample-data/sales-sample.csv) — no need to find your own data.
@@ -219,6 +264,25 @@ After signing up → **New dataset** → upload the file → all 4 chart types s
 | `PUT` | `/api/dashboards/{id}` | ✅ | Update a dashboard |
 | `DELETE` | `/api/dashboards/{id}` | ✅ | Delete a dashboard |
 | `GET` | `/health` | ❌ | Health check |
+
+### Quick example — signup, login, and an authenticated call
+
+```bash
+# 1. Sign up
+curl -X POST http://localhost:8000/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "password": "your-password"}'
+
+# 2. Log in and grab the token
+TOKEN=$(curl -s -X POST http://localhost:8000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "password": "your-password"}' \
+  | jq -r '.access_token')
+
+# 3. Call an authenticated endpoint
+curl -X GET http://localhost:8000/api/dashboards \
+  -H "Authorization: Bearer $TOKEN"
+```
 
 Full interactive docs → **http://localhost:8000/docs**
 
@@ -258,7 +322,7 @@ Every dataset and dashboard is scoped to the authenticated user's JWT.
       <br/><b>Landing Page</b>
     </td>
     <td align="center" width="50%">
-      <img src="Images/Login_page .png" alt="Login" width="100%"/>
+      <img src="Images/Login_page.png" alt="Login" width="100%"/>
       <br/><b>Login</b>
     </td>
   </tr>
@@ -293,6 +357,28 @@ Every dataset and dashboard is scoped to the authenticated user's JWT.
     </td>
   </tr>
 </table>
+
+> 📝 Note: `Images/Login_page.png` — make sure this filename matches exactly (no stray spaces) in the repo, since GitHub's file hosting is case- and character-sensitive.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Docker Compose setup for one-command local spin-up
+- [ ] Production deployment guide (backend + frontend + MySQL + Redis)
+- [ ] Refresh token support alongside access tokens
+- [ ] Rate limiting on auth and upload endpoints
+- [ ] Additional chart types (scatter, stacked bar)
+
+---
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
