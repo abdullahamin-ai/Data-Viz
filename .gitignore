@@ -1,0 +1,19 @@
+# Root-level Python venv (separate from backend/.venv)
+.venv/
+venv/
+
+# Env files, wherever they end up
+.env
+.env.local
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

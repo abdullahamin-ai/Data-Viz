@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-ink text-[15px] text-slate-100 antialiased; margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+* { box-sizing: border-box; }
+
+::selection { background: rgba(201,162,75,.3); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+.font-display { font-family: "Fraunces", ui-serif, Georgia, serif; font-feature-settings: "ss01" 1; }
+.font-mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+
+.text-brass-gradient {
+  background: linear-gradient(100deg, #E4C67C, #C9A24B 60%, #9C7A34);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,.03) 25%, rgba(255,255,255,.07) 37%, rgba(255,255,255,.03) 63%);
+  background-size: 400% 100%;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+input:-webkit-autofill { -webkit-text-fill-color: #ECEDEF; -webkit-box-shadow: 0 0 0px 1000px #14171D inset; }
+
+/* Chrome applies :-webkit-autofill styling to the input itself immediately
+   on page load, but does NOT reliably recompute sibling-combinator styles
+   (like our peer-driven floating label) until the user interacts with the
+   field -- that's why the label only "fixes itself" after a click. This
+   0-duration animation fires the instant autofill happens (even before any
+   interaction), so JS can catch it via onAnimationStart and force the
+   label into its floated state right away. */
+@keyframes onAutoFillStart { from { opacity: 1; } to { opacity: 1; } }
+input:-webkit-autofill { animation-name: onAutoFillStart; animation-duration: 0.001s; }
+
+/* One consistent keyboard-focus treatment for every interactive element,
+   in the brand's brass accent, instead of the mismatched browser default. */
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid rgba(201,162,75,.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

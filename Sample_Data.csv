@@ -1,0 +1,26 @@
+date,region,product,category,sales,units,rating
+2024-01-05,North,Laptop Pro,Electronics,45000,15,4.5
+2024-01-08,South,Wireless Mouse,Accessories,2500,50,4.2
+2024-01-12,East,Office Chair,Furniture,18000,20,4.0
+2024-01-15,West,Laptop Pro,Electronics,52000,17,4.6
+2024-01-19,North,Standing Desk,Furniture,31000,10,4.3
+2024-01-22,South,USB-C Hub,Accessories,4200,60,3.9
+2024-01-26,East,Laptop Pro,Electronics,48000,16,4.5
+2024-01-29,West,Wireless Mouse,Accessories,2800,55,4.1
+2024-02-02,North,Office Chair,Furniture,19500,22,4.1
+2024-02-06,South,Monitor 27in,Electronics,36000,18,4.4
+2024-02-09,East,Standing Desk,Furniture,28000,9,4.2
+2024-02-13,West,USB-C Hub,Accessories,3900,58,3.8
+2024-02-16,North,Monitor 27in,Electronics,39000,20,4.5
+2024-02-20,South,Laptop Pro,Electronics,51000,17,4.6
+2024-02-23,East,Wireless Mouse,Accessories,2600,52,4.0
+2024-02-27,West,Office Chair,Furniture,20500,23,4.2
+2024-03-02,North,Standing Desk,Furniture,33000,11,4.4
+2024-03-05,South,Monitor 27in,Electronics,37500,19,4.3
+2024-03-09,East,USB-C Hub,Accessories,4100,59,3.9
+2024-03-12,West,Laptop Pro,Electronics,54000,18,4.7
+2024-03-16,North,Wireless Mouse,Accessories,2900,57,4.2
+2024-03-19,South,Office Chair,Furniture,21000,24,4.1
+2024-03-23,East,Monitor 27in,Electronics,38000,19,4.4
+2024-03-26,West,Standing Desk,Furniture,34500,12,4.5
+2024-03-30,North,USB-C Hub,Accessories,4300,61,4.0
